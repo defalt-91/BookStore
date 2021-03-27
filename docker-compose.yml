@@ -9,7 +9,8 @@ services:
       - POSTGRES_PASSWORD=postgres
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn bookstore_project.wsgi -b 0.0.0.0:8000
     environment:
       - ENVIRONMENT=development
       - DEBUG=1
