@@ -21,7 +21,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # Django admin
-    path('admin/', admin.site.urls),
+    path('defalt91/', admin.site.urls),
     # User management
     path('accounts/', include('allauth.urls')),  # new
     # # signup is complete on us
