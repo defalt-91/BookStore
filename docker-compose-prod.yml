@@ -1,0 +1,23 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn bookstore_project.wsgi -b 0.0.0.0:8000
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=False
+      - SECRET_KEY=_8yvnmh(p%2=z1bd#=!n6lqtzmnro)wzajog&!_sl#6)dimn(s
+      - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51IY5AxLfRs1YE0VUq6UreyxgmR1nszQWoQdqYoxria7P4Dn3v4jJRG7FaKFEvi5ri19RrY4Ritn84LzoZm4RX1dC00fJN8blX5
+      - STRIPE_TEST_SECRET_KEY=sk_test_51IY5AxLfRs1YE0VURf6S055ylR6R6bbQR38GJK1OYsRptO7J44PDbaco9FV0CoQHkH23KPT8RXeXfzN6ORsUxn1000a261Y7Li
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+volumes:
+  postgres_data:

@@ -1,0 +1,47 @@
+<!-- templates/_base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>{% block title %} Bookstore {% endblock title %}</title>
+</head>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <div class="row shadow">
+            <div class="col-auto m-3"><a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">Bookstore</a></div>
+            <div class="col-auto  ms-auto">
+                <nav class="my-2 my-md-0 mr-md-3">
+                    <div class="d-flex flex-column flex-md-row p-3 px-md-4 mb-3 bg-white border-bottom "> <a class="p-2 text-dark " href="{% url 'book_list' %}">Books</a>
+                        <a class="p-2 text-dark nav-link" href="{% url 'about' %}">About</a>
+                        {% if user.is_authenticated %}
+                        <a class="p-2 text-dark" href="{% url 'account_logout' %}">Log Out</a>
+                        {% else %}
+                        <a class="p-2 text-dark " href="{% url 'account_login' %}">Log In</a>
+                        <a class="btn btn-outline-primary" href="{% url 'account_signup' %}">Sign Up</a>
+                        {% endif %}
+                        <form class="form-inline mt-2 mt-md-0 align-self-end shadow" action="{% url 'search_results' %}" method="get">
+                            <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %} {% endblock content %}
+    </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+</html>

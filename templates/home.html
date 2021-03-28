@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<h1>HomePage</h1>
+<img class="bookcover" src="{% static 'images/test.jpg' %}">
+{% if user.is_authenticated %}
+<p>Hi {{ user.email }}!</p>
+<p><a href="{% url 'account_logout' %}">Log Out</a></p>
+{% else %}
+<p>You are not logged in</p>
+<p><a href="{% url 'account_login' %}">Log In</a> |
+  <a href="{% url 'account_signup' %}">Sign Up</a></p>
+<a href="{% provider_login_url 'github' %}">Sign In With GitHub</a>
+<a href="{% provider_login_url 'google' %}">Sign In With Google</a>
+{# <a href="{% provider_login_url 'google' %}">Sign In With GooGle</a> #}
+{% endif %}
+{% endblock content %}
